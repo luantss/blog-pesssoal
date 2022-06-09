@@ -16,8 +16,8 @@ import com.generation.blogpessoal.model.Usuario;
 import com.generation.blogpessoal.service.UsuarioService;
 
 @RestController
-@RequestMapping
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/usuarios")
+@CrossOrigin("*")
 public class UsuarioController {
 
 	@Autowired
