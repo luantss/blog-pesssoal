@@ -21,8 +21,8 @@ import com.generation.blogpessoal.model.Tema;
 import com.generation.blogpessoal.repository.TemaRepository;
 
 @RestController
+@RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/tema")
 public class TemaController {
 
 	@Autowired
@@ -40,9 +40,9 @@ public class TemaController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Tema>> buscaTemaNome(@PathVariable String nome) {
-		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Tema>> buscaTemaDescricao(@PathVariable String descricao) {
+		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
 	}
 	
 	@PostMapping
@@ -51,7 +51,7 @@ public class TemaController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Tema> atualizaTema (@RequestBody Tema tema) {
+	public ResponseEntity<Tema> atualizaTema (@Valid @RequestBody Tema tema) {
 		return ResponseEntity.ok(repository.save(tema));
 	}
 	
