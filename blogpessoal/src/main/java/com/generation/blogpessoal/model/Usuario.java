@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario {
@@ -24,33 +26,34 @@ public class Usuario {
 	private Long id;
 
 	@NotNull
-	@Size(min = 2, max = 100) 
+	@Size(min = 2, max = 100)
 	private String nome;
 
-	@NotNull
-	@Email
-	private String usuario;
+	@Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
+	private String usuarioLogin;
 
 	@NotNull
 	@Size(min = 5, max = 100)
 	private String senha;
-	
+
 	private String foto;
-	
+
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
-	
-	public Usuario(Long id, String nome, String usuario, String senha, String foto) {
+
+	public Usuario(Long id, String nome, String usuarioLogin, String senha, String foto) {
 		this.id = id;
 		this.nome = nome;
-		this.usuario = usuario;
+		this.usuarioLogin = usuarioLogin;
 		this.senha = senha;
 		this.foto = foto;
 	}
-	
+
 	public Usuario() {
-		
+
 	}
 
 	public Long getId() {
@@ -69,12 +72,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getUsuarioLogin() {
+		return usuarioLogin;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsuarioLogin(String usuarioLogin) {
+		this.usuarioLogin = usuarioLogin;
 	}
 
 	public String getSenha() {

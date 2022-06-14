@@ -31,7 +31,7 @@ public class UsuarioService {
 	
 	public Optional<UserLogin> Logar(Optional<UserLogin> user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<Usuario> usuario = repository.findByUsuario(user.get().getUsuario());
+		Optional<Usuario> usuario = repository.findByUsuarioLogin(user.get().getUsuario());
 		
 		if(usuario.isPresent()) {
 			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
@@ -52,7 +52,7 @@ public class UsuarioService {
 	
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 		if(repository.findById(usuario.getId()).isPresent()) {
-			Optional<Usuario> buscaUsuario = repository.findByUsuario(usuario.getUsuario());
+			Optional<Usuario> buscaUsuario = repository.findByUsuarioLogin(usuario.getUsuarioLogin());
 			if((buscaUsuario.isPresent()) && (buscaUsuario.get().getId() != usuario.getId()))
 				throw new ResponseStatusException(
 						HttpStatus.BAD_REQUEST, "Usuário já existe!", null);

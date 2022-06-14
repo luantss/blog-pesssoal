@@ -59,7 +59,7 @@ public class UsuarioControllerTest {
 				"/usuarios/cadastrar",HttpMethod.POST,corpoRequisicao,Usuario.class);
 		assertEquals(HttpStatus.CREATED,corpoResposta.getStatusCode());
 		assertEquals(corpoRequisicao.getBody().getNome(),corpoResposta.getBody().getNome());
-		assertEquals(corpoRequisicao.getBody().getUsuario(),corpoResposta.getBody().getUsuario());
+		assertEquals(corpoRequisicao.getBody().getUsuarioLogin(),corpoResposta.getBody().getUsuarioLogin());
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class UsuarioControllerTest {
 				.exchange("/usuarios/atualizar", HttpMethod.PUT, corpoRequisicao, Usuario.class);
 		assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
 		assertEquals(corpoRequisicao.getBody().getNome(), corpoResposta.getBody().getNome());
-		assertEquals(corpoRequisicao.getBody().getUsuario(), corpoResposta.getBody().getUsuario());
+		assertEquals(corpoRequisicao.getBody().getUsuarioLogin(), corpoResposta.getBody().getUsuarioLogin());
 	}
 	
 	@Test
